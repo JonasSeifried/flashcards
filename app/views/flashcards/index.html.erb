@@ -1,0 +1,12 @@
+<h1>Flashcards</h1>
+
+<%= link_to "Create Flashcard", new_flashcard_path if authenticated? %> 
+<%= link_to "Login", new_session_path unless authenticated?%>
+
+<div id="flashcards">
+    <% @flashcards.each do |flashcard| %>
+        <div>
+            <%= link_to flashcard.title, flashcard%>
+        </div>
+    <% end %>
+</div>

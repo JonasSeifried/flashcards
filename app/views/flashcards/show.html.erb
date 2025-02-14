@@ -1,0 +1,8 @@
+<h1><%= @flashcard.title %></h1>
+<%= @flashcard.body %>
+<%= link_to "Flashcards", flashcards_path %>
+<% if authenticated? %>
+    <%= link_to "Edit", edit_flashcard_path(@flashcard)%>
+    <%= button_to "Delete", @flashcard, method: :delete, data: { turbo_confirm: "Are you sure?" } %>
+<% end %>
+<br>
