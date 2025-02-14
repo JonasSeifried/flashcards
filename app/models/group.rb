@@ -1,5 +1,5 @@
 class Group < ApplicationRecord
-  has_many :memberships
-  has_many :users, through: :memberships
-  has_many :flashcards, dependent: :destroy
+  has_many :memberships, dependent: :destroy
+  has_many :users, through: :memberships, dependent: :destroy
+  has_many :decks, dependent: :destroy
 end

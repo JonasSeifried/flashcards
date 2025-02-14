@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_13_224916) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_14_200707) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -49,13 +49,21 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_13_224916) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "decks", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "group_id", null: false
+    t.index ["group_id"], name: "index_decks_on_group_id"
+  end
+
   create_table "flashcards", force: :cascade do |t|
     t.string "title"
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "group_id", null: false
-    t.index ["group_id"], name: "index_flashcards_on_group_id"
+    t.integer "deck_id", null: false
+    t.index ["deck_id"], name: "index_flashcards_on_deck_id"
   end
 
   create_table "groups", force: :cascade do |t|
@@ -82,6 +90,24 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_13_224916) do
     t.index ["user_id"], name: "index_sessions_on_user_id"
   end
 
+  create_table "user_deck_stats", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.integer "deck_id", null: false
+    t.index ["deck_id"], name: "index_user_deck_stats_on_deck_id"
+    t.index ["user_id"], name: "index_user_deck_stats_on_user_id"
+  end
+
+  create_table "user_flashcard_progresses", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.integer "flashcard_id", null: false
+    t.index ["flashcard_id"], name: "index_user_flashcard_progresses_on_flashcard_id"
+    t.index ["user_id"], name: "index_user_flashcard_progresses_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email_address", null: false
     t.string "password_digest", null: false
@@ -92,8 +118,13 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_13_224916) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "flashcards", "groups"
+  add_foreign_key "decks", "groups"
+  add_foreign_key "flashcards", "decks"
   add_foreign_key "memberships", "groups"
   add_foreign_key "memberships", "users"
   add_foreign_key "sessions", "users"
+  add_foreign_key "user_deck_stats", "decks"
+  add_foreign_key "user_deck_stats", "users"
+  add_foreign_key "user_flashcard_progresses", "flashcards"
+  add_foreign_key "user_flashcard_progresses", "users"
 end

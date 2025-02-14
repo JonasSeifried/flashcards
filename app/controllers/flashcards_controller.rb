@@ -1,9 +1,10 @@
 class FlashcardsController < ApplicationController
-  before_action :set_group
+  allow_unauthenticated_access only: %i[]
   before_action :set_flashcard, only: %i[show edit update destroy]
-  allow_unauthenticated_access only: %i[ index show ]
+  before_action :user_in_group_of_flashcard, only: %i[show edit update destroy]
+
   def index
-    @flashcards = @group.flashcards
+    @flashcards = Flashcard.where(deck: Deck.where(group: Group.joins(:memberships).where(memberships: { user: Current.session.user })))
   end
 
   def show
@@ -15,7 +16,7 @@ class FlashcardsController < ApplicationController
 
   def create
     @flashcard = Flashcard.new(flashcard_params)
-    if @flaschard.save
+    if @flashcard.save
       redirect_to @flashcard
     else
       render :new, status: :unprocessable_entity
@@ -35,18 +36,21 @@ class FlashcardsController < ApplicationController
 
   def destroy
     @flashcard.destroy
-    redirect_to flashcards_path
+    redirect_to @flashcard.deck_path
   end
 
   private
-
-  def set_group
-    @group = Group.find(params[:group_id])
-  end
     def set_flashcard
       @flashcard = Flashcard.find(params[:id])
     end
     def flashcard_params
-      params.expect(flashcard: [ :title, :body, :group_id ])
+      params.expect(flashcard: [ :title, :body ])
+    end
+    def user_in_group_of_flashcard
+      group = @flashcard.deck.group
+
+      unless group.users.include?(Current.session.user)
+        redirect_to root_path, alert: "You are not a member of this group and cannot access this flashcard."
+      end
     end
 end
