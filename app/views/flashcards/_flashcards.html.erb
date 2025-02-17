@@ -1,0 +1,9 @@
+<h2>Flashcards</h2>
+
+<div id="flashcards">
+    <% @deck.flashcards.each do |flashcard| %>
+        <%= render "flashcards/flashcard", flashcard: flashcard %>
+    <% end %>
+</div>
+
+<%= render "flashcards/form", deck: @deck, flashcard: Flashcard.new %>

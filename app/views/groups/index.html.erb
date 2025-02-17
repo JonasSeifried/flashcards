@@ -1,0 +1,15 @@
+<div style="display: flex; items-align: center;">
+<h1>Groups</h1>
+
+
+<%= link_to "Create Group", new_group_path %>
+</div>
+<br>
+
+<div id="groups">
+    <% @groups.each do |group| %>
+        <div>
+            <%= link_to group.name, group%>
+        </div>
+    <% end %>
+</div>
