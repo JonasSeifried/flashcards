@@ -9,7 +9,7 @@ class User < ApplicationRecord
   has_many :user_flashcard_progresses
   has_many :user_deck_stats
 
-  after_create :create_private_group
+  after_create :create_private_group_and_deck
 
   def create_private_group_and_deck
     default_group = Group.create!(name: "Example Group")

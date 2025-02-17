@@ -17,16 +17,16 @@
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
 
-    <%= stylesheet_link_tag "https://cdn.simplecss.org/simple.css" %>
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
-    <%#= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
-    <%= stylesheet_link_tag :app, "data-turbo-track": Rails.env.production? ? "reload" : "" %>
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%#= stylesheet_link_tag :app, "data-turbo-track": Rails.env.production? ? "reload" : "" %>
     <%= javascript_importmap_tags %>
+
   </head>
 
   <body>
-    <nav>
+    <nav class="flex justify-between p-2  border-solid  border border-b-slate-500">
       <%= link_to "Home", root_path %>
       <%= button_to "Log out", destroy_user_session_path, method: :delete if user_signed_in?%>
     </nav>
@@ -35,6 +35,8 @@
         <%= msg %>
       </div>
     <% end %>
-    <%= yield %>
+    <div class="flex flex-col justify-center h-full w-full align-middle">
+      <%= yield %>
+    </div>
   </body>
 </html>

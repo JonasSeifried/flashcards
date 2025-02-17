@@ -1,5 +1,6 @@
-<div id="flashcard_<%= flashcard.id %>">
+<div id="flashcard_<%= flashcard.id %>" class="border-none bg-white">
     <%= link_to flashcard.title, edit_deck_flashcard_path(flashcard.deck, flashcard) %>
-    <%= button_to "Delete", deck_flashcard_path(flashcard.deck, flashcard),method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "p-0 border-none pb-8" %>
-    <p class="bg-yellow-600"><%= flashcard.title %></p>
+    <%= form_with url: deck_flashcard_path(flashcard.deck, flashcard), method: :delete do |form| %>
+      <%= button_tag "delete", type: "submit", class: "" %>
+    <% end %>
 </div>
