@@ -1,6 +1,8 @@
 <nav class="navbar" role="navigation" aria-label="main navigation">
   <div class="navbar-start">
     <%= link_to "Home", root_path, class:"navbar-item" %>
+    <% if user_signed_in? %>
+      
     <div class="navbar-item has-dropdown is-hoverable">
       <%= link_to @group ? @group.name : "Groups", @group ? @group : groups_path, class: "navbar-link" %>
       <div class="navbar-dropdown">
@@ -18,9 +20,10 @@
           <% end %>
         </div>
     </div>
+    <% end %>
   </div>
   <div class="navbar-end">
-    <%= link_to "sign out", destroy_user_session_path, method: :delete, class:"navbar-item"  if user_signed_in?%>
+    <%= link_to "sign out", destroy_user_session_path, data: { turbo_method: :delete, turb_confirm: "Are you sure?" }, class:"navbar-item"  if user_signed_in?%>
     <% if !user_signed_in? %>
       <%= link_to "sign up", new_user_registration_path, class:"navbar-item" %>
       <%= link_to "sign in", new_user_session_path, class:"navbar-item" %>

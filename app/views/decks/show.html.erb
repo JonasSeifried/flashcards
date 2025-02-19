@@ -3,7 +3,7 @@
 <h1><%= @deck.name %></h1>
 <p>Group: <%= link_to @deck.group.name, @deck.group %> </p>
 <%= link_to "Edit", edit_deck_path(@deck)%>
-<%= button_to "Delete", deck_path(@deck), method: :delete, data: { turbo_confirm: "Are you sure?" } %>
+<%= link_to "Delete", deck_path(@deck), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
 <br>
 
 <%= render "flashcards/flashcards", deck: @deck %>

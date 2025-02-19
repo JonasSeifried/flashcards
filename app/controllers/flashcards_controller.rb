@@ -1,7 +1,6 @@
 class FlashcardsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_group, only: %i[create]
-  before_action :set_deck, only: %i[create]
+  before_action :set_deck_and_group, only: %i[create]
   before_action :set_flashcard, only: %i[show edit update destroy]
 
 
@@ -10,6 +9,8 @@ class FlashcardsController < ApplicationController
   end
 
   def create
+    puts flashcard_params
+    puts @deck
     authorize @deck
     flashcard = Flashcard.new flashcard_params
     flashcard.deck = @deck
@@ -45,11 +46,9 @@ class FlashcardsController < ApplicationController
       @deck = @flashcard.deck
       @group = @deck.group
     end
-    def set_deck
+    def set_deck_and_group
       @deck = Deck.find(params[:deck_id])
-    end
-    def set_group
-      @deck = Deck.find(params[:group_id])
+      @group = @deck.group
     end
     def flashcard_params
       params.expect!(flashcard: [ :title, :body ])
