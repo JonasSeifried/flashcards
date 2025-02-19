@@ -69,3 +69,7 @@ gem "pundit", "~> 2.4"
 gem "tailwindcss-ruby", "~> 4.0"
 
 gem "tailwindcss-rails", "~> 4.0"
+
+gem "bulma-rails"
+
+gem "dartsass-rails", "~> 0.5.1"

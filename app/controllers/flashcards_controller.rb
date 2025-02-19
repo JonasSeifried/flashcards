@@ -1,6 +1,7 @@
 class FlashcardsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_deck
+  before_action :set_group, only: %i[create]
+  before_action :set_deck, only: %i[create]
   before_action :set_flashcard, only: %i[show edit update destroy]
 
 
@@ -27,7 +28,7 @@ class FlashcardsController < ApplicationController
   def update
     authorize @flashcard
     if @flashcard.update(flashcard_params)
-      redirect_to deck_flashcard_path(@deck, @flashcard)
+      redirect_to @flashcard
     else
       render :edit, status: :unprocesable_entity
     end
@@ -41,9 +42,14 @@ class FlashcardsController < ApplicationController
   private
     def set_flashcard
       @flashcard = Flashcard.find(params[:id])
+      @deck = @flashcard.deck
+      @group = @deck.group
     end
     def set_deck
       @deck = Deck.find(params[:deck_id])
+    end
+    def set_group
+      @deck = Deck.find(params[:group_id])
     end
     def flashcard_params
       params.expect!(flashcard: [ :title, :body ])

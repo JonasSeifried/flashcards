@@ -1,6 +1,7 @@
 <div id="flashcard_<%= flashcard.id %>" class="border-none bg-white">
-    <%= link_to flashcard.title, edit_deck_flashcard_path(flashcard.deck, flashcard) %>
-    <%= form_with url: deck_flashcard_path(flashcard.deck, flashcard), method: :delete do |form| %>
-      <%= button_tag "delete", type: "submit", class: "" %>
+    <%= link_to flashcard.title, edit_flashcard_path(flashcard) %>
+    <%= form_with url: flashcard, method: :delete do |form| %>
+      <%= button_tag "delete", type: "submit", class: "button" %>
     <% end %>
+    <button class="button is-primary">Primary button </button>
 </div>

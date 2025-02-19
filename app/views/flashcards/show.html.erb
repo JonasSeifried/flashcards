@@ -1,9 +1,17 @@
-<h1><%= @flashcard.title %></h1>
 <p>Deck:<%= link_to @flashcard.deck.name, @flashcard.deck %></p>
+<div class="card self-center w-1/3">
+  <header class="card-header">
+    <p class="card-header-title"><%= @flashcard.title %>
+  </header>
+  <div class="card-content">
+    <div class="content">
+      <%= @flashcard.body %>
+    </div>
+  </div>
 <% if user_signed_in? %>
-    <%= link_to "Edit", edit_deck_flashcard_path(@flashcard.deck, @flashcard)%>
-    <%= button_to "Delete", deck_flashcard_path(@flashcard.deck, @flashcard), method: :delete, data: { turbo_confirm: "Are you sure?" } %>
-<% end %>
-<br>
+  <footer class="card-footer">
+    <%= link_to "Edit", [:edit, @flashcard], class: "card-footer-item" %>
+    <%= link_to "Delete", @flashcard, method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "card-footer-item" %>
 
-<%= @flashcard.body %>
+  </footer>
+<% end %>

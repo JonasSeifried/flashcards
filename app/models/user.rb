@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   has_many :memberships
   has_many :groups, through: :memberships
+  has_many :decks, through: :groups
   has_many :user_flashcard_progresses
   has_many :user_deck_stats
 

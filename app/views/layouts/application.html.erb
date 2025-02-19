@@ -26,15 +26,12 @@
   </head>
 
   <body>
-    <nav class="flex justify-between p-2  border-solid  border border-b-slate-500">
-      <%= link_to "Home", root_path %>
-      <%= button_to "Log out", destroy_user_session_path, method: :delete if user_signed_in?%>
-    </nav>
-    <% flash.each do |type, msg| %>
-      <div class="<%= type %>">
-        <%= msg %>
-      </div>
-    <% end %>
+    <%= render "layouts/navigation_bar" %>
+  <% flash.each do |type, msg| %>
+    <div class="<%= type %>">
+      <%= msg %>
+    </div>
+  <% end %>
     <div class="flex flex-col justify-center h-full w-full align-middle">
       <%= yield %>
     </div>

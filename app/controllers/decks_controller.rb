@@ -1,5 +1,6 @@
 class DecksController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_group, only: %i[create]
   before_action :set_deck, only: %i[show edit update destroy]
 
   def show
@@ -45,5 +46,9 @@ class DecksController < ApplicationController
   private
     def set_deck
       @deck = Deck.find(params[:id])
+      @group = @deck.group
+    end
+    def set_group
+      @group = Group.find params[:group_id]
     end
 end

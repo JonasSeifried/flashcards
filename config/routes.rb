@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :groups
-  resources :decks do
-    resources :flashcards
+  shallow do
+    resources :groups do
+      resources :decks do
+        resources :flashcards
+      end
+    end
   end
 
 
