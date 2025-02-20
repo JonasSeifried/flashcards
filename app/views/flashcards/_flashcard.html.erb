@@ -1,4 +1,8 @@
-<div id="flashcard_<%= flashcard.id %>" class="">
-    <%= link_to flashcard.title, edit_flashcard_path(flashcard) %>
-    <%= link_to "delete", flashcard, data: { turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+<div class="w-full flex justify-between items-center">
+  <div class="">
+    <%= link_to flashcard.title, flashcard, class: "link" %>
+  </div>
+  <div class="">
+    <%= link_to "delete", flashcard, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "link" %>
+  </div>
 </div>

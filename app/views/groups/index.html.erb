@@ -2,33 +2,27 @@
 
 
 
-<div class="box mt-4">
-  <div class="level mb-0">
-    <div class="level-left">
-      <section class="hero level-item">
-        <div class="hero-body p-0">
-          <p class="title">Groups</p>
-          <p class="subtitle">All Groups you have access to!</p>
+<div class="flex justify-center flex-col w-2/3 mt-2  ">
+  <div class="w-full flex justify-between items-center">
+    <div class="">
+        <div class="">
+          <p class="text-2xl">Groups</p>
+          <p class="">All Groups you have access to!</p>
         </div>
-      </section>
     </div>
-    <div class="level-right">
-      <%= link_to "Create Group", new_group_path %>
+    <div class="">
+      <%= link_to "Create Group", new_group_path, class: "link" %>
     </div>
   </div>
-  <hr class="my-3">
   <div id="groups" >
     <% @groups.each do |group| %>
-        <div class="level mb-0">
-          <div class="level-left">
-              <%= link_to group.name, group, class: "level-item" %>
+        <div class="w-full flex justify-between items-center">
+          <div class="">
+              <%= link_to group.name, group, class: "link" %>
           </div>
-          <div class="level-right ">
-            <%= link_to "delete", group, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+          <div class="">
+            <%= link_to "delete", group, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "link" %>
           </div>
         </div>
-         <% if @groups.last != group %>
-           <hr class="my-3"> 
-         <% end %> 
     <% end %>
 </div>

@@ -9,8 +9,6 @@ class FlashcardsController < ApplicationController
   end
 
   def create
-    puts flashcard_params
-    puts @deck
     authorize @deck
     flashcard = Flashcard.new flashcard_params
     flashcard.deck = @deck

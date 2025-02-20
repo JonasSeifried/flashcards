@@ -1,10 +1,14 @@
-<h2>Flashcards</h2>
-
-<div id="flashcards">
+    <div class="flex justify-between items-center">
+      <div class="">
+        <div class="">
+          <p class="text-2xl">flashcards</p>
+          <p class="">Flashcards of <%= @deck.name %></p>
+        </div>
+      </div>
+      <div class="">
+        <%= link_to "Create Flashcard", new_deck_flashcard_path(@deck), class: "link" %>
+      </div>
+    </div>
     <% @deck.flashcards.each do |flashcard| %>
-        <%= render "flashcards/flashcard", flashcard: flashcard %>
+      <%= render "flashcards/flashcard", flashcard: flashcard %>
     <% end %>
-</div>
-
-<%= render "flashcards/form", deck: @deck, flashcard: Flashcard.new %>
-

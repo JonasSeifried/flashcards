@@ -25,14 +25,14 @@
 
   </head>
 
-  <body>
+  <body class="bg-background">
     <%= render "layouts/navigation_bar" %>
   <% flash.each do |type, msg| %>
     <div class="<%= type %>">
       <%= msg %>
     </div>
   <% end %>
-    <div class="container align-middle">
+    <div class="w-full flex justify-center">
       <%= yield %>
     </div>
   </body>

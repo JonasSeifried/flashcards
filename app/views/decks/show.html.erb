@@ -1,9 +1,22 @@
 <%= turbo_stream_from @deck %>
 
-<h1><%= @deck.name %></h1>
-<p>Group: <%= link_to @deck.group.name, @deck.group %> </p>
-<%= link_to "Edit", edit_deck_path(@deck)%>
-<%= link_to "Delete", deck_path(@deck), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
-<br>
+<div class="flex justify-center flex-col w-2/3 mt-2 gap-4">
+  <div class="w-full flex justify-between items-center">
+    <div class="">
+        <div class="">
+          <p class="text-2xl"><%= @deck.name %></p>
+          <p class="">Placeholder for Deck descriptions</p>
+        </div>
+    </div>
+    <div>
+      <%= link_to "Edit", edit_deck_path(@deck), class: "link"%>
+      <%= button_to "Delete", @deck, method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "link" %>
+    </div>
+  </div>
+  <div id="flashcards" class="w-4/5 self-center"> 
+    <%= render "flashcards/flashcards", deck: @deck %>
+  </div>
 
-<%= render "flashcards/flashcards", deck: @deck %>
+  <div id="new flashcards" class="w-4/5 self-center">
+    <%= render "flashcards/form", deck: @deck, flashcard: Flashcard.new(deck: @deck) %>
+</div>

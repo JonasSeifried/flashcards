@@ -1,1 +1,36 @@
 @import "tailwindcss";
+
+
+@theme {
+    --color-primary: #4F46E5;
+    --color-primary-dark: #4338CA;
+    --color-primary-light: #6366F1;
+    --color-secondary: #EC4899;
+    --color-secondary-dark: #DB2777;
+    --color-secondary-light: #F472B6;
+    --color-background: #F9FAFB;
+    --color-background-dark: #1E1E1E;
+    --color-foreground: #1F2937;
+    --color-foreground-dark: #F9FAFB;
+    --color-muted: #6B7280;
+    --color-muted-dark: #9CA3AF;
+    --color-border: #E5E7EB;
+    --color-border-dark: #374151;
+    --color-danger: #EF4444;
+    --color-danger-dark: #DC2626;
+}
+
+
+@layer base {
+  
+  body {
+    @apply bg-background text-foreground
+  }
+}
+
+@layer components {
+
+  .link {
+    @apply text-primary hover:underline
+  }
+}

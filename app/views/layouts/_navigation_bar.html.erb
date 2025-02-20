@@ -1,33 +1,15 @@
-<nav class="navbar" role="navigation" aria-label="main navigation">
-  <div class="navbar-start">
-    <%= link_to "Home", root_path, class:"navbar-item" %>
-    <% if user_signed_in? %>
-      
-    <div class="navbar-item has-dropdown is-hoverable">
-      <%= link_to @group ? @group.name : "Groups", @group ? @group : groups_path, class: "navbar-link" %>
-      <div class="navbar-dropdown">
-        <% current_user.groups.each do |group| %>
-          <%= link_to group.name, group, class: "navbar-item #{ 'is-selected' if @group == group }" %> 
-        <% end %>
-      </div>
-    </div>
-    <div class="navbar-item has-dropdown is-hoverable">
-      <%= link_to @deck ? @deck.name : "Decks", @deck ? @deck : groups_path, class: "navbar-link" %>
-
-        <div class="navbar-dropdown">
-          <% (@group ? @group.decks : current_user.decks).each do |deck| %>
-            <%= link_to deck.name, deck, class: "navbar-item #{ 'is-selected' if @deck == deck }" %> 
-          <% end %>
-        </div>
-    </div>
+<nav role="navigation" aria-label="main navigation" class="">
+  <div class="flex flex-wrap items-center justify-between mx-auto p-4">
+  <div class="">
+    <%= link_to "Home", root_path, class:"link" %>
+  </div>
+  <div class="">
+    <%= link_to "sign out", destroy_user_session_path, data: { turbo_method: :delete, turb_confirm: "Are you sure?" }, class:"link"  if user_signed_in?%>
+    <% if !user_signed_in? %>
+      <%= link_to "sign up", new_user_registration_path, class:"link" %>
+      <%= link_to "sign in", new_user_session_path, class:"link" %>
     <% end %>
   </div>
-  <div class="navbar-end">
-    <%= link_to "sign out", destroy_user_session_path, data: { turbo_method: :delete, turb_confirm: "Are you sure?" }, class:"navbar-item"  if user_signed_in?%>
-    <% if !user_signed_in? %>
-      <%= link_to "sign up", new_user_registration_path, class:"navbar-item" %>
-      <%= link_to "sign in", new_user_session_path, class:"navbar-item" %>
-    <% end %>
   </div>
 </nav>
 
